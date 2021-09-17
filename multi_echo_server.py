@@ -31,7 +31,7 @@ def process_echo(addr, conn):
     #recieve data, wait a bit, then send it back
     full_data = conn.recv(BUFFER_SIZE)
     conn.sendall(full_data)
-    conn.shutdown(socket.SHUT_DOWN)
+    conn.shutdown(socket.SHUT_RDWR)
     conn.close()
     
 if __name__ == "__main__":
