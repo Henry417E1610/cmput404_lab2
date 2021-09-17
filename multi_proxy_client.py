@@ -9,12 +9,13 @@ payload = "GET / HTTP/1.0\r\nHost: www.google.com\r\n\r\n"
 def connection(address):
     try:
         soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        soc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         soc.connect(address)
         soc.sendall(payload.encode())
         soc.shutdown(socket.SHUT_WR)        
         
-        data = s.recv(BUFFER_SIZE)
-        print(data)
+        data = soc.recv(BUFFER_SIZE)
+        sys.stdout.write('\n' + repr(data) + '\n')
     
     except Exception as e:
         print(e)

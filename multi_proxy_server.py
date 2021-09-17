@@ -3,6 +3,10 @@ import time
 import sys
 from multiprocessing import Process
 
+HOST = ""
+PORT = 8001
+BUFFER_SIZE = 1024
+
 def get_ip(host):
     print(f'Getting IP for {host}')
     try:
@@ -40,7 +44,7 @@ def main():
                 print('Connecting to Google')
                 ip = get_ip(ext_host)
                 end.connect((ip,ext_port))
-                p = Process(target=handle_req, args=(addr,conn,end))
+                p = Process(target=handle_req, args=(conn,addr,end))
                 p.daemon = True
                 p.start()
                 print("Process begins", p)  
